@@ -37,7 +37,7 @@ function App() {
       loginPages.includes(pathName)
     ) {
       console.log("else if:");
-      navigate("/shipments-dashboard");
+      // navigate("/shipments-dashboard");
     }
   }, [navigate, user, pathName]);
 

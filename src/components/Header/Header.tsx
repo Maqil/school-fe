@@ -39,11 +39,13 @@ import {
 } from "../Header/Header.style";
 
 function Header() {
-  const user = useAuth();
-  const [anchorEl, setAnchorEl] = React.useState<HTMLButtonElement | null>(
+  const auth = useAuth();
+  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(
     null
   );
-  const [userInitial, setUserInitial] = React.useState("");
+  const [userInitial, setUserInitial] = useState("");
+  const [userRole, setUserRole] = useState("");
+  const [userFullName, setUserFullName] = useState("");
 
   const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
     setAnchorEl(event.currentTarget);
@@ -62,7 +64,7 @@ function Header() {
     };
     sessionStorage.setItem("alertMessage", JSON.stringify(response));
     window.location.href.replace("login", "");
-    user.signOut();
+    auth.signOut();
     toggleDrawer(false);
     handleClose();
   };
@@ -82,16 +84,16 @@ function Header() {
   };
   const { customerData, loading } = useCustomer();
   //Get User FirstName and LastName
-  const userFullName =
-    (customerData[0]?.firstName
-      ? customerData[0]?.firstName?.charAt(0).toUpperCase() +
-        customerData[0]?.firstName?.slice(1)
-      : "") +
-    " " +
-    (customerData[0]?.lastName
-      ? customerData[0]?.lastName?.charAt(0).toUpperCase() +
-        customerData[0]?.lastName?.slice(1)
-      : "");
+  // const userFullName = 
+  //   (customerData[0]?.firstName
+  //     ? customerData[0]?.firstName?.charAt(0).toUpperCase() +
+  //       customerData[0]?.firstName?.slice(1)
+  //     : "") +
+  //   " " +
+  //   (customerData[0]?.lastName
+  //     ? customerData[0]?.lastName?.charAt(0).toUpperCase() +
+  //       customerData[0]?.lastName?.slice(1)
+  //     : "");
 
   if (typeof userFullName === "string") {
     if (customerData[0]?.firstName && customerData[0]?.lastName) {
@@ -133,18 +135,20 @@ function Header() {
 
 
   useEffect(() => {
-    if (user.user && !user.loading) {
-      let username = user.user?.sub;
+    if (auth.user?.sub && !auth.loading) {
+      let username = auth.user?.sub;
       let initials = username!.charAt(0) + username?.split(".")[1].charAt(0);
       setUserInitial(initials.toUpperCase());
+      setUserRole(auth.user?.role);
+      setUserFullName(username)
     }
-  }, [user]);
+  }, [auth.user?.sub]);
 
   //Set css class based on condition
   var languageclass,
     profileClass,
     hamIconclass = "";
-  if (user.user != null) {
+  if (auth.user?.sub != null) {
     languageclass = "language-hide";
     hamIconclass = "hamIconShow";
     profileClass = "profile-show";
@@ -167,29 +171,6 @@ function Header() {
             {/* Rightside menu item */}
             <MainRightNav>
               <MainRightNavItem>
-                {/* <Collapse in={user.user !== null}>
-                  <div className="main-left-nav-item">
-                    <MainLeftNavItemUL>
-                      <MainLeftNavItemLi>
-                        <MainLeftNavItemHref
-                          className="main-menu"
-                          href="./shipments-dashboard"
-                        >
-                          {" "}
-                          {t("all.header.link.shipment-list")}
-                        </MainLeftNavItemHref>
-                      </MainLeftNavItemLi>
-                      <MainLeftNavItemLi>
-                        <MainLeftNavItemHref
-                          className="main-menu"
-                          href="./contact"
-                        >
-                          {t("all.header.link.got-an-issue")}
-                        </MainLeftNavItemHref>
-                      </MainLeftNavItemLi>
-                    </MainLeftNavItemUL>
-                  </div>
-                </Collapse> */}
 
                 <div className={languageclass}>
                   <LanguageContainer panelopen="FR" paneloff="EN">
@@ -206,16 +187,41 @@ function Header() {
                     </label>
                   </LanguageContainer>
                 </div>
+                
+                <Collapse in={auth.user !== null}>
+                  <div className="main-left-nav-item">
+                    <MainLeftNavItemUL>
+                      <MainLeftNavItemLi>
+                        <MainLeftNavItemHref
+                          className="main-menu"
+                          href="./shipments-dashboard"
+                        >
+                          {" "}
+                          {userRole}
+                        </MainLeftNavItemHref>
+                      </MainLeftNavItemLi>
+                      {/* <MainLeftNavItemLi>
+                        <MainLeftNavItemHref
+                          className="main-menu"
+                          href="./contact"
+                        >
+                          {t("all.header.link.got-an-issue")}
+                        </MainLeftNavItemHref>
+                      </MainLeftNavItemLi> */}
+                    </MainLeftNavItemUL>
+                  </div>
+                </Collapse>
+               
                 <div className={profileClass}>
-                  <Collapse in={user.user !== null}>
+                  <Collapse in={auth.user !== null}>
                     <GreetingDiv>
-                      {/* {loading ? (
+                      {userInitial === "" ? (
                         <HeaderButton>
                           <PersonOutlineIcon
                             sx={{ fontSize: "3rem" }}
                           ></PersonOutlineIcon>
                         </HeaderButton>
-                      ) : ( */}
+                      ) : (
                         <HeaderButton
                           tabIndex={0}
                           aria-label={initial}
@@ -234,7 +240,7 @@ function Header() {
                         >
                           {userInitial}
                         </HeaderButton>
-                      {/* )} */}
+                      )} 
                     </GreetingDiv>
                     <PopoverDiv
                       id={id}
@@ -301,7 +307,7 @@ function Header() {
                 </div>
               </MainRightNavItem>
               <div className={hamIconclass}>
-                <Collapse in={user.user !== null}>
+                <Collapse in={auth.user !== null}>
                   <MenuHamburgerButton onClick={toggleDrawer(true)}>
                     <img src={hamburger} alt="" width="100%" height="100%" />
                   </MenuHamburgerButton>
@@ -310,7 +316,7 @@ function Header() {
             </MainRightNav>
           </MainContainerMenu>
           {/* SideHamburger menu item(mobile and desktop) */}
-          <Collapse in={user.user !== null}>
+          <Collapse in={auth.user !== null}>
             <SideNavContainer>
               <SideDrawer
                 anchor="right"

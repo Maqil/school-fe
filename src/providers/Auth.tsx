@@ -70,9 +70,8 @@ export const AuthProvider = props => {
           };
         } else {
           localStorage.setItem("user_token", res.data.data.signin);
-          localStorage.setItem("user_user", res.data.data);
           const decodeUser: SchoolUserInterface = jwt_decode(res.data.data.signin);
-          console.debug("decodeUser: ", decodeUser);
+          localStorage.setItem("user_user", JSON.stringify(decodeUser));
           setUser(decodeUser);
           response = {
             data: decodeUser,
@@ -98,14 +97,16 @@ export const AuthProvider = props => {
         @return response - the result of the API call. returns data: the authenticated user object
     */
     const getCurrentUser = async () => {
+      console.debug("getCurrentUser: ",);
       setLoading(true);
-      if (user) {
+      if (user?.sub) {
+        console.debug("already exisiting", user);
         // currentUser already exisiting
         setUser(user);
         setLoading(false);
       } else {
         try {
-          setUser(JSON.parse(sessionStorage.getItem("user_user") || "{}"));
+          setUser(JSON.parse(localStorage.getItem("user_user") || "{}"));
           // currentUser checking aws
         } catch (error: any) {
           console.debug("ERROR: getCurrentUser ", error);
@@ -116,7 +117,7 @@ export const AuthProvider = props => {
 
     getCurrentUser();
 
-  }, [user]);
+  }, [user?.sub]);
 
   /*    COGNITO USER FUNCTIONS    */
 
@@ -174,6 +175,8 @@ export const AuthProvider = props => {
    */
   const clearUserData = () => {
     setUser(null);
+    localStorage.removeItem("user_user")
+    localStorage.removeItem("user_token")
   };
 
   /*  **********  COGNITO SIGN IN/OUT  **********  */

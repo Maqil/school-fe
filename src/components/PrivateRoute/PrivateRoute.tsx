@@ -4,27 +4,28 @@ import { useAuth } from "../../providers/Auth";
 import Loader from "../Loader/Loader";
 
 const PrivateRoute = () => {
-  const user = useAuth();
+  const auth = useAuth();
   const [state, setState] = useState({});
-  console.log("PrivateRoute: ", user.user);
+  console.log("PrivateRoute: ", auth.user);
 
   console.log("state: ", state);
   useEffect(() => {
     const fetchState = async () => {
-      await user.checkSessionExpired();
+      await auth.checkSessionExpired();
       setState(JSON.parse(sessionStorage.getItem("alertMessage") || "{}"));
     };
     fetchState();
-  }, [user]);
+  }, [auth.user]);
 
-  if (user.user) {
-    console.log("user.user");
+  if (auth.user) {
+    console.log("user exists");
+    console.log("user exists",auth.user);
   } else {
-    console.log("Navigate");
+    console.log("user not found");
   }
 
-  if (user.loading) return <Loader />;
-  return user.user ? <Outlet /> : <Navigate to="/login" state={state} />;
+  if (auth.loading) return <Loader />;
+  return auth.user ? <Outlet /> : <Navigate to="/login" state={state} />;
 };
 
 export default PrivateRoute;
