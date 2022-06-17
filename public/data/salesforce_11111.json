@@ -1,0 +1,50 @@
+[
+  {
+    "Name": "RIVO PORTAL POC2_1",
+    "Type": "Ecomm - Shipper",
+    "Phone": "5147777777",
+    "Fax": null,
+    "Website": null,
+    "BillingStreet": "1010test",
+    "BillingCity": "Vancouver",
+    "BillingState": "British Columbia",
+    "BillingPostalCode": "J1J1J1",
+    "BillingCountry": "Canada",
+    "BillingStateCode": "BC",
+    "BillingCountryCode": "CA",
+    "Acct_ID": "0012i00000cdSIwAAM",
+    "SK_ID": "676767",
+    "Account_Status": null,
+    "RecordTypeId": "0121S000000XxRYQA0",
+    "Id": "0012i00000cdSIwAAM",
+    "Contacts": {
+      "totalSize": 1,
+      "records": [
+        {
+          "Id": "0044i00001KXYktAAH",
+          "AccountId": "0044i00000cdSIwAAM",
+          "LastName": "Khushbu",
+          "FirstName": "Patel",
+          "MailingStreet": "5656 New Street",
+          "MailingCity": "Vancouver",
+          "MailingState": "British Columbia",
+          "MailingPostalCode": "J1J1J1",
+          "MailingCountry": "Canada",
+          "MailingStateCode": "BC",
+          "MailingCountryCode": "CA",
+          "MobilePhone": "5140000000",
+          "Cognito_ID": null,
+          "Dept": "Management",
+          "Email": "bl@aircanada1.ca",
+          "SK_ID": "354638999; 12323124; 3245234523",
+          "Status": "Active",
+          "Portal_Group_Access": "Admin",
+          "Contact_ID": "0032i00001KXYktAAH",
+          "RecordTypeId": "0121S000000XxVLQA0",
+          "Phone": "5147777777",
+          "Title": null
+        }
+      ]
+    }
+  }
+]

@@ -1,0 +1,26 @@
+[
+    {
+      "Name": "RIVO PORTAL POC2_1",
+      "Type": "Ecomm - Shipper",
+      "Phone": "5147777777",
+      "Fax": null,
+      "Website": null,
+      "BillingStreet": "1010test",
+      "BillingCity": "Vancouver",
+      "BillingState": "British Columbia",
+      "BillingPostalCode": "J1J1J1",
+      "BillingCountry": "Canada",
+      "BillingStateCode": "BC",
+      "BillingCountryCode": "CA",
+      "Acct_ID": "0012i00000cdSIwAAM",
+      "SK_ID": "676767",
+      "Account_Status": null,
+      "RecordTypeId": "0121S000000XxRYQA0",
+      "Id": "0012i00000cdSIwAAM",
+      "Contacts": {
+        "totalSize": 0,
+        "records": [
+        ]
+      }
+    }
+  ]
