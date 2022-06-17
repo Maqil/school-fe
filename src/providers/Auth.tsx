@@ -97,7 +97,6 @@ export const AuthProvider = props => {
         @return response - the result of the API call. returns data: the authenticated user object
     */
     const getCurrentUser = async () => {
-      console.debug("getCurrentUser: ",);
       setLoading(true);
       if (user?.sub) {
         console.debug("already exisiting", user);

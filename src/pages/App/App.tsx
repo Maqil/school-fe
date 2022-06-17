@@ -18,7 +18,7 @@ import { useApiError } from "../../providers/ApiErrorProvider";
 import AcErrorDialog from "../../components/AcErrorDialog/AcErrorDialog";
 
 function App() {
-  const user = useAuth();
+  const auth = useAuth();
   const apiError = useApiError();
   const navigate = useNavigate();
   const pathName = useLocation().pathname;
@@ -26,20 +26,18 @@ function App() {
 
   useEffect(() => {
     const loginPages = ["/login", "/forgot-password"];
-    user.checkSessionExpired();
-    if (!user.loading && user.user === null && !loginPages.includes(pathName)) {
+    auth.checkSessionExpired();
+    if (!auth.loading && auth.user?.sub === undefined && !loginPages.includes(pathName)) {
       const state = JSON.parse(sessionStorage.getItem("alertMessage") || "{}");
-      console.log("if:");
       navigate("/login", { state: state });
     } else if (
-      !user.loading &&
-      user.user !== null &&
+      !auth.loading &&
+      auth.user?.role !== undefined &&
       loginPages.includes(pathName)
     ) {
-      console.log("else if:");
-      // navigate("/shipments-dashboard");
+      navigate("/shipments-dashboard");
     }
-  }, [navigate, user, pathName]);
+  }, [navigate, auth, pathName]);
 
   return (
     <>

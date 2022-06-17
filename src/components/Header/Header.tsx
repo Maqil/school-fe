@@ -121,7 +121,6 @@ function Header() {
     window.location.reload();
   };
   useEffect(() => {
-    console.log('loading', loading);
     i18n.changeLanguage(langValue, (err, t) => {
       if (err)
         return console.debug(
@@ -135,14 +134,14 @@ function Header() {
 
 
   useEffect(() => {
-    if (auth.user?.sub && !auth.loading) {
+    if (auth.user?.sub !== undefined && !auth.loading) {
       let username = auth.user?.sub;
       let initials = username!.charAt(0) + username?.split(".")[1].charAt(0);
       setUserInitial(initials.toUpperCase());
       setUserRole(auth.user?.role);
       setUserFullName(username)
     }
-  }, [auth.user?.sub]);
+  }, [auth.loading, auth.user?.sub]);
 
   //Set css class based on condition
   var languageclass,
@@ -188,7 +187,7 @@ function Header() {
                   </LanguageContainer>
                 </div>
                 
-                <Collapse in={auth.user !== null}>
+                <Collapse in={auth.user?.role !== undefined}>
                   <div className="main-left-nav-item">
                     <MainLeftNavItemUL>
                       <MainLeftNavItemLi>

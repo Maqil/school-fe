@@ -6,9 +6,6 @@ import Loader from "../Loader/Loader";
 const PrivateRoute = () => {
   const auth = useAuth();
   const [state, setState] = useState({});
-  console.log("PrivateRoute: ", auth.user);
-
-  console.log("state: ", state);
   useEffect(() => {
     const fetchState = async () => {
       await auth.checkSessionExpired();
@@ -18,7 +15,6 @@ const PrivateRoute = () => {
   }, [auth.user]);
 
   if (auth.user) {
-    console.log("user exists");
     console.log("user exists",auth.user);
   } else {
     console.log("user not found");
