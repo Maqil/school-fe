@@ -1,0 +1,122 @@
+[
+  {
+    "airWaybill": "00017404",
+    "issueDate": "2020-01-21T05:30:07",
+    "estimatedDeliveryDate": "2018-06-20T11:31:51",
+    "packageReference": "16492",
+    "shipperCity": "Veguita",
+    "consigneeName": "Orr Campbell",
+    "consigneeCity": "Chalfant",
+    "status": "DEP",
+    "origin": "Cannondale",
+    "destination": "Orovada"
+  },
+  {
+    "airWaybill": "00037586",
+    "issueDate": "2016-10-31T11:48:41",
+    "estimatedDeliveryDate": "2021-01-09T12:35:21",
+    "packageReference": "18370",
+    "shipperCity": "Lavalette",
+    "consigneeName": "Ferguson Sosa",
+    "consigneeCity": "Chelsea",
+    "status": "ADL",
+    "origin": "Lumberton",
+    "destination": "Smock"
+  },
+  {
+    "airWaybill": "00209506",
+    "issueDate": "2015-08-14T03:31:48",
+    "estimatedDeliveryDate": "2015-10-03T11:47:55",
+    "packageReference": "12970",
+    "shipperCity": "Ryderwood",
+    "consigneeName": "Natalia Tate",
+    "consigneeCity": "Floriston",
+    "status": "RCS",
+    "origin": "Mappsville",
+    "destination": "Camas"
+  },
+  {
+    "airWaybill": "00270616",
+    "issueDate": "2016-02-22T01:21:09",
+    "estimatedDeliveryDate": "2020-05-05T02:49:35",
+    "packageReference": "17700",
+    "shipperCity": "Moquino",
+    "consigneeName": "Alison Hawkins",
+    "consigneeCity": "Weeksville",
+    "status": "BKD",
+    "origin": "Shepardsville",
+    "destination": "Deercroft"
+  },
+  {
+    "airWaybill": "00270362",
+    "issueDate": "2017-06-13T01:52:42",
+    "estimatedDeliveryDate": "2017-05-21T06:09:19",
+    "packageReference": "20760",
+    "shipperCity": "Onton",
+    "consigneeName": "Martha Cash",
+    "consigneeCity": "Yonah",
+    "status": "DPU",
+    "origin": "Albrightsville",
+    "destination": "Buxton"
+  },
+  {
+    "airWaybill": "00271585",
+    "issueDate": "2014-01-19T03:54:23",
+    "estimatedDeliveryDate": "2014-02-09T11:01:56",
+    "packageReference": "14928",
+    "shipperCity": "Benson",
+    "consigneeName": "Jo Parsons",
+    "consigneeCity": "Roosevelt",
+    "status": "RCS",
+    "origin": "Celeryville",
+    "destination": "Cazadero"
+  },
+  {
+    "airWaybill": "00037564",
+    "issueDate": "2021-04-05T02:43:38",
+    "estimatedDeliveryDate": "2019-07-17T03:49:04",
+    "packageReference": "12184",
+    "shipperCity": "Hollymead",
+    "consigneeName": "Florine Snow",
+    "consigneeCity": "Homestead",
+    "status": "RTS",
+    "origin": "Leola",
+    "destination": "Tioga"
+  },
+  {
+    "airWaybill": "00037424",
+    "issueDate": "2017-10-19T09:09:18",
+    "estimatedDeliveryDate": "2020-01-14T06:44:08",
+    "packageReference": "18825",
+    "shipperCity": "Abrams",
+    "consigneeName": "Jordan Watkins",
+    "consigneeCity": "Southview",
+    "status": "RTS",
+    "origin": "Corinne",
+    "destination": "Bannock"
+  },
+  {
+    "airWaybill": "00037494",
+    "issueDate": "2017-06-03T11:30:49",
+    "estimatedDeliveryDate": "2018-03-22T02:49:50",
+    "packageReference": "19089",
+    "shipperCity": "Blanford",
+    "consigneeName": "Levine Sanchez",
+    "consigneeCity": "Joppa",
+    "status": "ADL",
+    "origin": "Fontanelle",
+    "destination": "Hampstead"
+  },
+  {
+    "airWaybill": "00037590",
+    "issueDate": "2016-10-13T09:16:03",
+    "estimatedDeliveryDate": "2018-01-27T03:08:23",
+    "packageReference": "13805",
+    "shipperCity": "Emison",
+    "consigneeName": "Morgan Daugherty",
+    "consigneeCity": "Allensworth",
+    "status": "RTS",
+    "origin": "Gilmore",
+    "destination": "Tilleda"
+  }
+]
