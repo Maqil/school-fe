@@ -78,23 +78,15 @@ const ViewProfile = () => {
             <AccordionDetails>
               <Box pt={5}>
                 <Grid container spacing={4}>
-                  <Grid item md={2} sx={{ textAlign: "left" }}>
+                  <Grid item md={3} sx={{ textAlign: "left" }}>
                     <SmallTextTypo>
-                      {t("view-profile.block1.form.input-company")}
+                      {t("view-profile.block1.form.input-full-name")}
                     </SmallTextTypo>
                     <LargeTextTypo>
                       {mainCustomerData && mainCustomerData.Name}
                     </LargeTextTypo>
                   </Grid>
-                  <Grid item md={2} sx={{ textAlign: "left" }}>
-                    <SmallTextTypo>
-                      {t("view-profile.block1.form.input-mobile")}
-                    </SmallTextTypo>
-                    <LargeTextTypo>
-                      {customerData.length > 0 && mobileNumber}
-                    </LargeTextTypo>
-                  </Grid>
-                  <Grid item md={4} sx={{ textAlign: "left" }}>
+                  <Grid item md={3} sx={{ textAlign: "left" }}>
                     <SmallTextTypo>
                       {t("view-profile.block1.form.input-email")}
                     </SmallTextTypo>
@@ -102,9 +94,17 @@ const ViewProfile = () => {
                       {customerData.length > 0 && customerData[0].emailId}
                     </LargeTextTypo>
                   </Grid>
-                  <Grid item md={4} sx={{ textAlign: "left" }}>
+                  <Grid item md={3} sx={{ textAlign: "left" }}>
                     <SmallTextTypo>
-                      {t("view-profile.block1.form.input-billing-address")}
+                      {t("view-profile.block1.form.input-mobile")}
+                    </SmallTextTypo>
+                    <LargeTextTypo>
+                      {customerData.length > 0 && mobileNumber}
+                    </LargeTextTypo>
+                  </Grid>
+                  <Grid item md={3} sx={{ textAlign: "left" }}>
+                    <SmallTextTypo>
+                      {t("view-profile.block1.form.input-username")}
                     </SmallTextTypo>
                     <LargeTextTypo>
                       {customerData.length > 0 &&
@@ -118,7 +118,7 @@ const ViewProfile = () => {
                   sx={{ textAlign: "left", padding: "3rem 0 0 0" }}
                 >
                   <SmallTextTypo>
-                    {t("view-profile.block1.form.input-account-number")}
+                    {t("view-profile.block1.form.input-role")}
                   </SmallTextTypo>
                   {accountNumber.length > 0 &&
                     accountNumber.map(accountNum => (
