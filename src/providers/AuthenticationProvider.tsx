@@ -28,7 +28,7 @@ const AuthContext = createContext({
   // getSubId: () => {}
 });
 
-export const AuthProvider = props => {
+export const AuthenticationProvider = props => {
   const [user, setUser] = useState<SchoolUserInterface | null>(null);
   const [loading, setLoading] = useState(true);
 

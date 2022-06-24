@@ -4,7 +4,7 @@ import Amplify, { Auth } from "aws-amplify";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/system";
 import App from "./pages/App/App";
-import { AuthProvider } from "./providers/AuthenticationProvider";
+import { AuthenticationProvider } from "./providers/AuthenticationProvider";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme/theme";
 import "./assets/i18n/i18n.ts";
@@ -105,14 +105,14 @@ if (
 ReactDOM.render(
   <React.StrictMode>
     <BrowserRouter basename={process.env.PUBLIC_URL}>
-      <AuthProvider>
+      <AuthenticationProvider>
         <ThemeProvider theme={theme}>
           <CssBaseline />
           <ApiErrorProvider>
             <App />
           </ApiErrorProvider>
         </ThemeProvider>
-      </AuthProvider>
+      </AuthenticationProvider>
     </BrowserRouter>
   </React.StrictMode>,
   document.getElementById("root")
