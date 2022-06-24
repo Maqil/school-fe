@@ -11,7 +11,7 @@ import {
   FooterThirdDiv,
   FooterLinks
 } from "./Footer.style";
-import { useAuth } from "../../providers/Auth";
+import { useAuth } from "../../providers/AuthenticationProvider";
 
 function Footer() {
   const user = useAuth();

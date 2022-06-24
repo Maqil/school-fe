@@ -37,6 +37,7 @@
     "react-final-form": "^6.5.7",
     "react-final-form-listeners": "^1.0.3",
     "react-i18next": "^11.13.0",
+    "react-idle-timer": "^5.4.0",
     "react-mui-dropzone": "^4.0.5",
     "react-password-checklist": "^1.3.2",
     "react-responsive": "^9.0.0-beta.6",

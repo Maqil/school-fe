@@ -7,7 +7,7 @@ import CloseIcon from "@mui/icons-material/Close";
 import { Link } from "react-router-dom";
 import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
 import { FormControl, Collapse, Typography, Button } from "@mui/material";
-import { useAuth } from "../../providers/Auth";
+import { useAuth } from "../../providers/AuthenticationProvider";
 import { useCustomer } from "../../providers/CustomerProvider";
 import {
   HeaderButton,
@@ -82,7 +82,7 @@ function Header() {
     }
     setSideNav(open);
   };
-  const { customerData, loading } = useCustomer();
+  const { customerData, loadingCustomer } = useCustomer();
   //Get User FirstName and LastName
   // const userFullName = 
   //   (customerData[0]?.firstName
@@ -96,12 +96,12 @@ function Header() {
   //     : "");
 
   if (typeof userFullName === "string") {
-    if (customerData[0]?.firstName && customerData[0]?.lastName) {
+    if (customerData!.firstName && customerData!.lastName) {
       // save first and last name in the local storage
-      sessionStorage.setItem("firstName", customerData[0]?.firstName);
-      sessionStorage.setItem("lastName", customerData[0]?.lastName);
-      localStorage.setItem("firstName", customerData[0]?.firstName);
-      localStorage.setItem("lastName", customerData[0]?.lastName);
+      sessionStorage.setItem("firstName", customerData!.firstName);
+      sessionStorage.setItem("lastName", customerData!.lastName);
+      localStorage.setItem("firstName", customerData!.firstName);
+      localStorage.setItem("lastName", customerData!.lastName);
     }
   }
   const { t } = useTranslation();
@@ -130,7 +130,7 @@ function Header() {
       t("key");
       document.documentElement.lang = getI18n().resolvedLanguage;
     });
-  }, [i18n, langValue, loading]);
+  }, [i18n, langValue, loadingCustomer]);
 
 
   useEffect(() => {

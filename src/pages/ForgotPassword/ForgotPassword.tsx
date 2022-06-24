@@ -16,7 +16,7 @@ import {
 } from "../../components/LoginComponents/LoginComponents.style";
 import { ForgotPasswordSchema } from "../../schema/ForgotPasswordSchema";
 import { ForgotPasswordInterface } from "../../interfaces/ForgotPasswordInterface";
-import { useAuth } from "../../providers/Auth";
+import { useAuth } from "../../providers/AuthenticationProvider";
 import ResetPassword from "../../components/ResetPassword/ResetPassword";
 import { TabTitle } from "../../utils/GeneralFunctions";
 /**

@@ -7,5 +7,6 @@ export interface LoginInterface {
 export interface SchoolUserInterface {
   iat: number,
   role: string,
-  sub: string
+  sub: string,
+  email: string
 }

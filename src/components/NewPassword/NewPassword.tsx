@@ -23,10 +23,10 @@ import {
 } from "../LoginComponents/LoginComponents.style";
 import { NewPasswordSchema } from "../../schema/NewPasswordSchema";
 import { NewPasswordInterface } from "../../interfaces/NewPasswordInterface";
-import { useAuth } from "../../providers/Auth";
+import { useAuth } from "../../providers/AuthenticationProvider";
 import VerificationCode from "../VerificationCode/VerificationCode";
 import { TabTitle } from "../../utils/GeneralFunctions";
-// import { useAuth } from "../../providers/Auth";
+// import { useAuth } from "../../providers/AuthenticationProvider";
 
 /**
  * Uses the optional helper makeValidate function to format the error messages

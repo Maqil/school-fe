@@ -1,5 +1,5 @@
 import React from "react";
-//import { useAuth } from './Auth';
+//import { useAuth } from './AuthenticationProvider';
 import { useApiError } from "./ApiErrorProvider";
 import { error } from "../constants/bindings";
 import SignRequest from "../helpers/SignRequest";

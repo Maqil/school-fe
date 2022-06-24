@@ -2,7 +2,7 @@ import React, { useEffect } from "react";
 
 import { Routes, Route, useLocation, useNavigate } from "react-router-dom";
 import { AppWrapper, MainContainer } from "./App.style";
-import { useAuth } from "../../providers/Auth";
+import { useAuth } from "../../providers/AuthenticationProvider";
 import Header from "../../components/Header/Header";
 import Footer from "../../components/Footer/Footer";
 import PrivateRoute from "../../components/PrivateRoute/PrivateRoute";
@@ -16,12 +16,45 @@ import { AppContextProvider } from "./AppContextProvider";
 import ViewProfile from "../ViewProfile/ViewProfile";
 import { useApiError } from "../../providers/ApiErrorProvider";
 import AcErrorDialog from "../../components/AcErrorDialog/AcErrorDialog";
+import { useIdleTimer } from 'react-idle-timer'
 
 function App() {
   const auth = useAuth();
   const apiError = useApiError();
   const navigate = useNavigate();
   const pathName = useLocation().pathname;
+  const loginPages = ["/login", "/forgot-password"];
+
+  const handleOnIdle = async () => {
+    if (!auth.loading && auth.user !== null && !loginPages.includes(pathName)) {
+      sessionStorage.removeItem("expiry");
+  
+      let response = {
+        showAlert: true,
+        severity: "error",
+        message: "all.alert.session-expired"
+      };
+      sessionStorage.setItem("alertMessage", JSON.stringify(response));
+      await auth.signOut();
+    }
+  }
+
+  // const handleOnAction = (e) => {
+  //   let currentTime = Math.floor(Date.now() / 1000);
+  //   const expiryTime =  Number(sessionStorage.getItem("expiry")) || null;
+  //   if (!user.loading && user.user !== null && !loginPages.includes(pathName)) {
+  //     if (expiryTime && (expiryTime - currentTime <= 300)) {
+  //       user.checkSessionExpired();
+  //     }
+  //   }
+  // }
+
+  useIdleTimer({
+    timeout: 10 * 60 * 1000,
+    onIdle: handleOnIdle,
+    // onAction: handleOnAction,
+    events: ["mousedown"]
+  })
   
 
   useEffect(() => {

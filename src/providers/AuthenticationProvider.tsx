@@ -102,10 +102,11 @@ export const AuthProvider = props => {
         console.debug("already exisiting", user);
         // currentUser already exisiting
         setUser(user);
-        setLoading(false);
+        setLoading(false); 
       } else {
         try {
-          setUser(JSON.parse(localStorage.getItem("user_user") || "{}"));
+          const parsedUser = JSON.parse(localStorage.getItem("user_user")|| "{}");
+          Object.keys(parsedUser).length !== 0 ? setUser(parsedUser) : setUser(null);
           // currentUser checking aws
         } catch (error: any) {
           console.debug("ERROR: getCurrentUser ", error);
@@ -116,7 +117,7 @@ export const AuthProvider = props => {
 
     getCurrentUser();
 
-  }, [user?.sub]);
+  }, [user, user?.sub]);
 
   /*    COGNITO USER FUNCTIONS    */
 
@@ -466,7 +467,7 @@ export const AuthProvider = props => {
           // let jwt = accessToken.getJwtToken();
           // let jwtObject = jwt_decode(jwt) as any;
           // let expireTime = jwtObject.exp as number;
-          sessionStorage.removeItem("alertMessage");
+          // sessionStorage.removeItem("alertMessage"); // TO DO : see this
           sessionStorage.setItem("expiry", String("expiry"));
           // NEW EXPIRY TIME
       //   }

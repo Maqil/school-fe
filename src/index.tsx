@@ -4,7 +4,7 @@ import Amplify, { Auth } from "aws-amplify";
 import CssBaseline from "@mui/material/CssBaseline";
 import { ThemeProvider } from "@mui/system";
 import App from "./pages/App/App";
-import { AuthProvider } from "./providers/Auth";
+import { AuthProvider } from "./providers/AuthenticationProvider";
 import reportWebVitals from "./reportWebVitals";
 import theme from "./theme/theme";
 import "./assets/i18n/i18n.ts";
@@ -20,7 +20,7 @@ if (
   process.env.REACT_APP_ENV_LOADED === "PROD"
 ) {
   Amplify.configure({
-    Auth: {
+    AuthenticationProvider: {
       region: process.env.REACT_APP_AWS_REGION,
       identityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID,
       userPoolId: process.env.REACT_APP_AWS_USERPOOL_ID,

@@ -11,27 +11,27 @@ function ShipmentsSkSelect(props) {
   const { customerData } = useCustomer();
   const { dispatchList } = props;
 
-  const accountNumbers = useMemo(() => {
-    // transform string to array of accounts
-    return (
-      (customerData.length > 0 &&
-        customerData[0].accountNumber &&
-        customerData[0].accountNumber.split(";")) ||
-      []
-    );
-  }, [customerData]);
+  // const accountNumbers = useMemo(() => {
+  //   // transform string to array of accounts
+  //   return (
+  //     (customerData.length > 0 &&
+  //       customerData[0].accountNumber &&
+  //       customerData[0].accountNumber.split(";")) ||
+  //     []
+  //   );
+  // }, [customerData]);
 
-  useEffect(() => {
-    if (accountNumbers.length > 0) {
-      updateAccount(accountNumbers[0]);
-      if (accountNumbers.length > 1) {
-        setSelectStatus("visible");
-      } else {
-        setSelectStatus("hidden");
-      }
-    }
-    // eslint-disable-next-line
-  }, [accountNumbers]);
+  // useEffect(() => {
+  //   if (accountNumbers.length > 0) {
+  //     updateAccount(accountNumbers[0]);
+  //     if (accountNumbers.length > 1) {
+  //       setSelectStatus("visible");
+  //     } else {
+  //       setSelectStatus("hidden");
+  //     }
+  //   }
+  //   // eslint-disable-next-line
+  // }, [accountNumbers]);
 
   // set up default value
   const [skValue, setSkValue] = useState<string>("");
@@ -39,9 +39,9 @@ function ShipmentsSkSelect(props) {
 
   // create sk map for dropdown
   const skMap: any = [];
-  accountNumbers.forEach(function (acct) {
-    skMap.push({ key: acct, value: acct });
-  });
+  // accountNumbers.forEach(function (acct) {
+  //   skMap.push({ key: acct, value: acct });
+  // });
 
   const changeSkHandler = event => {
     updateAccount(event.target.value);

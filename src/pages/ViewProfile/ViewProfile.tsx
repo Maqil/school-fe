@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
   AccordionDetails,
   Alert,
@@ -25,20 +25,25 @@ const ViewProfile = () => {
   const location = useLocation();
   const state = location.state as AlertStateInterface;
   TabTitle(t("view-profile.block1.header.page-title"));
-  const { mainCustomerData, customerData } = useCustomer();
-  const accountNumber =
-    (customerData.length > 0 &&
-      customerData[0].accountNumber &&
-      customerData[0].accountNumber.split(";")) ||
-    [];
-  const mobileNumber =
-    (customerData.length > 0 &&
-      customerData[0].mobile &&
-      customerData[0].mobile
-        .replace("+1", "") // remove country code +1
-        .replace(/\D+/g, "")
-        .replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3")) ||
-    "";
+  const { customerData } = useCustomer();
+
+  useEffect(() => {
+    console.log("customerData", customerData!);
+  }, [customerData]);
+  
+  // const accountNumber =
+  //   (customerData.length > 0 &&
+  //     customerData[0].accountNumber &&
+  //     customerData[0].accountNumber.split(";")) ||
+  //   [];
+  // const mobileNumber =
+  //   (customerData.length > 0 &&
+  //     customerData[0].mobile &&
+  //     customerData[0].mobile
+  //       .replace("+1", "") // remove country code +1
+  //       .replace(/\D+/g, "")
+  //       .replace(/(\d{3})(\d{3})(\d{4})/, "($1) $2-$3")) ||
+  //   "";
 
   return (
     <>
@@ -71,27 +76,38 @@ const ViewProfile = () => {
           <Paper variant="section" sx={{ padding: 0 }}>
             <ItemHeader>
               <Typography component="h2" variant="sectionTitle">
-                {customerData.length > 0 &&
-                  `${customerData[0].firstName} ${customerData[0].lastName}`}
+              {/* {Object.keys(customerData).length > 0 && */}
+                  {customerData!.firstName} {customerData!.lastName}
               </Typography>
             </ItemHeader>
             <AccordionDetails>
               <Box pt={5}>
                 <Grid container spacing={4}>
-                  <Grid item md={3} sx={{ textAlign: "left" }}>
+                  <Grid item md={2} sx={{ textAlign: "left" }}>
                     <SmallTextTypo>
-                      {t("view-profile.block1.form.input-full-name")}
+                      {t("view-profile.block1.form.input-first-name")}
                     </SmallTextTypo>
                     <LargeTextTypo>
-                      {mainCustomerData && mainCustomerData.Name}
+                    {customerData!.firstName}
+                      {/* {mainCustomerData && mainCustomerData.Name} */}
                     </LargeTextTypo>
                   </Grid>
-                  <Grid item md={3} sx={{ textAlign: "left" }}>
+                  <Grid item md={2} sx={{ textAlign: "left" }}>
+                    <SmallTextTypo>
+                      {t("view-profile.block1.form.input-last-name")}
+                    </SmallTextTypo>
+                    <LargeTextTypo>
+                    {customerData!.lastName}
+                      {/* {mainCustomerData && mainCustomerData.Name} */}
+                    </LargeTextTypo>
+                  </Grid>
+                  <Grid item md={2} sx={{ textAlign: "left" }}>
                     <SmallTextTypo>
                       {t("view-profile.block1.form.input-email")}
                     </SmallTextTypo>
                     <LargeTextTypo style={{ wordWrap: "break-word" }}>
-                      {customerData.length > 0 && customerData[0].emailId}
+                    {customerData!.email}
+                      {/* {customerData.length > 0 && customerData[0].emailId} */}
                     </LargeTextTypo>
                   </Grid>
                   <Grid item md={3} sx={{ textAlign: "left" }}>
@@ -99,7 +115,8 @@ const ViewProfile = () => {
                       {t("view-profile.block1.form.input-mobile")}
                     </SmallTextTypo>
                     <LargeTextTypo>
-                      {customerData.length > 0 && mobileNumber}
+                    {customerData!.phone}
+                      {/* {customerData.length > 0 && mobileNumber} */}
                     </LargeTextTypo>
                   </Grid>
                   <Grid item md={3} sx={{ textAlign: "left" }}>
@@ -107,8 +124,9 @@ const ViewProfile = () => {
                       {t("view-profile.block1.form.input-username")}
                     </SmallTextTypo>
                     <LargeTextTypo>
-                      {customerData.length > 0 &&
-                        `${customerData[0].mailingStreet}, ${customerData[0].mailingCity}, ${customerData[0].mailingState} ${customerData[0].mailingPostalCode}, ${customerData[0].mailingCountry}`}
+                    {customerData!.username}
+                      {/* {customerData.length > 0 &&
+                        `${customerData[0].mailingStreet}, ${customerData[0].mailingCity}, ${customerData[0].mailingState} ${customerData[0].mailingPostalCode}, ${customerData[0].mailingCountry}`} */}
                     </LargeTextTypo>
                   </Grid>
                 </Grid>
@@ -120,12 +138,13 @@ const ViewProfile = () => {
                   <SmallTextTypo>
                     {t("view-profile.block1.form.input-role")}
                   </SmallTextTypo>
-                  {accountNumber.length > 0 &&
+                  {customerData!.beautifyRoleName}
+                  {/* {accountNumber.length > 0 &&
                     accountNumber.map(accountNum => (
                       <LargeTextTypo key={accountNum}>
                         {accountNum}
                       </LargeTextTypo>
-                    ))}
+                    ))} */}
                 </Grid>
                 <Grid item md={12} sx={{ textAlign: "left" }}></Grid>
               </Box>

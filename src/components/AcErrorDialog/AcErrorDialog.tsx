@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { error } from "../../constants/bindings";
 import AcDialogInterface from "../../interfaces/AcDialogInterface";
-import { useAuth } from "../../providers/Auth";
+import { useAuth } from "../../providers/AuthenticationProvider";
 import AcDialog from "../AcDialog/AcDialog";
 import { useApiError } from "../../providers/ApiErrorProvider";
 

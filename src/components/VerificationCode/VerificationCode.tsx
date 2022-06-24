@@ -16,7 +16,7 @@ import {
 import { VerificationCodeSchema } from "../../schema/VerificationCodeSchema";
 
 import { VerificationCodeInterface } from "../../interfaces/VerificationCodeInterface";
-import { useAuth } from "../../providers/Auth";
+import { useAuth } from "../../providers/AuthenticationProvider";
 import { TabTitle } from "../../utils/GeneralFunctions";
 /**
  * Uses the optional helper makeValidate function to format the error messages

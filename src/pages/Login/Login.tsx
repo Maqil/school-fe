@@ -31,7 +31,7 @@ import { Checkboxes } from "../../components/Mui/RivoMuiRffCheckbox";
 import { AlertStateInterface } from "../../interfaces/AlertStateInterface";
 import { LoginSchema } from "../../schema/LoginSchema";
 import { LoginInterface } from "../../interfaces/LoginInterface";
-import { useAuth } from "../../providers/Auth";
+import { useAuth } from "../../providers/AuthenticationProvider";
 import VerificationCode from "../../components/VerificationCode/VerificationCode";
 import NewPassword from "../../components/NewPassword/NewPassword";
 import { TabTitle } from "../../utils/GeneralFunctions";
@@ -127,8 +127,9 @@ const Login = () => {
   // remove first and last name in local storage
   React.useEffect(() => {
     if (state && state.showAlert && state.message === "all.alert.logout") {
-      if (sessionStorage) {       
-        let sessionName = (sessionStorage.getItem("firstName"))?sessionStorage.getItem("firstName"):"";
+      if (sessionStorage) {
+        console.log("sessionStorage: ");
+        let sessionName = sessionStorage.getItem("firstName") || "";
         sessionStorage.setItem("firstName", "");
         sessionStorage.setItem("lastName", "");
         localStorage.setItem("firstName", "");

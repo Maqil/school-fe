@@ -24,7 +24,7 @@ import {
 } from "../../components/LoginComponents/LoginComponents.style";
 import { ChangePasswordSchema } from "../../schema/ChangePasswordSchema";
 import { ChangePasswordInterface } from "../../interfaces/ChangePaswordInterface";
-import { useAuth } from "../../providers/Auth";
+import { useAuth } from "../../providers/AuthenticationProvider";
 import { TabTitle } from "../../utils/GeneralFunctions";
 /**
  * Uses the optional helper makeValidate function to format the error messages
