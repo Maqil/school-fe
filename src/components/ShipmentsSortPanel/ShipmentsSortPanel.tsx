@@ -1,6 +1,6 @@
 import { useTranslation } from "react-i18next";
 import { Box } from "@mui/material";
-import { ShipmentDataInterface } from "../../interfaces/ShipmentDataInterface";
+import { TodoDataInterface } from "../../interfaces/TodoDataInterface";
 import { visuallyHidden } from "@mui/utils";
 import { SectionAccordion } from "../../pages/ShipmentsDashboard/ShipmentsDashboard.style";
 import {
@@ -15,31 +15,31 @@ function ShipmentsSortPanel(props) {
   const { t } = useTranslation();
   const { order, orderBy, dispatchList } = props;
   interface HeadCell {
-    id: keyof ShipmentDataInterface;
+    id: keyof TodoDataInterface;
     label: string;
     numeric: boolean;
   }
 
   const headCells: readonly HeadCell[] = [
     {
-      id: "airWaybill",
+      id: "todoAiid",
       numeric: false,
-      label: "Rivo Tracking #"
+      label: "Todo Id #"
     },
     {
-      id: "packageReference",
+      id: "description",
       numeric: true,
       label: "Customer Order #"
     },
     {
-      id: "lastEventType",
-      numeric: true,
-      label: "Status"
-    },
-    {
-      id: "estimatedDeliveryDate",
+      id: "subject",
       numeric: true,
       label: "Estimated Delivery Date"
+    },
+    {
+      id: "professor",
+      numeric: true,
+      label: "Status"
     }
   ];
 

@@ -34,60 +34,63 @@ function ShipmentsRow(props) {
   const [expanded, setExpanded] = useState(false);
   const [tabValue, setTabValue] = useState("1");
 
+  console.log("row: ", row);
+  
+
   Moment.locale(getI18n().resolvedLanguage);
 
-  const handleTabChange = (event: SyntheticEvent, newValue: string) => {
-    setTabValue(newValue);
-  };
+  // const handleTabChange = (event: SyntheticEvent, newValue: string) => {
+  //   setTabValue(newValue);
+  // };
 
-  const handleRowExpand = async (event: SyntheticEvent) => {
-    setExpanded(!expanded);
-    if (!contentLoaded) {
-      await trackingContext.getTrackingData(row.airWaybill);
-      setFlag(true);
-    } else {
-      // do nothing... or handle reload because of previous error
-      if (
-        trackingContext.trackingData.get(row.airWaybill)?.status === "ERROR"
-      ) {
-        setContentError(false);
-        setContentLoaded(false);
-      }
-    }
-  };
+  // const handleRowExpand = async (event: SyntheticEvent) => {
+  //   setExpanded(!expanded);
+  //   if (!contentLoaded) {
+  //     await trackingContext.getTrackingData(row.airWaybill);
+  //     setFlag(true);
+  //   } else {
+  //     // do nothing... or handle reload because of previous error
+  //     if (
+  //       trackingContext.trackingData.get(row.airWaybill)?.status === "ERROR"
+  //     ) {
+  //       setContentError(false);
+  //       setContentLoaded(false);
+  //     }
+  //   }
+  // };
 
-  const reachedDestinationCodes = ["DLD", "DDL", "RTS", "ADL", "ATD", "DPU"];
-  const asReachedDestination = shipmentEvent => {
-    let asReachedDestinationFlag = false;
-    for (const reachedDestinationCode of reachedDestinationCodes) {
-      if (reachedDestinationCode === shipmentEvent) {
-        asReachedDestinationFlag = true;
-      }
-    }
-    return asReachedDestinationFlag;
-  };
-  const isLate =
-    Moment(row.estimatedDeliveryDate).isBefore() &&
-    !asReachedDestination(row.lastEventType)
-      ? true
-      : false;
+  // const reachedDestinationCodes = ["DLD", "DDL", "RTS", "ADL", "ATD", "DPU"];
+  // const asReachedDestination = shipmentEvent => {
+  //   let asReachedDestinationFlag = false;
+  //   for (const reachedDestinationCode of reachedDestinationCodes) {
+  //     if (reachedDestinationCode === shipmentEvent) {
+  //       asReachedDestinationFlag = true;
+  //     }
+  //   }
+  //   return asReachedDestinationFlag;
+  // };
+  // const isLate =
+  //   Moment(row.estimatedDeliveryDate).isBefore() &&
+  //   !asReachedDestination(row.lastEventType)
+  //     ? true
+  //     : false;
 
-  useEffect(() => {
-    if (
-      flag &&
-      !trackingContext.loading &&
-      trackingContext.trackingData.get(row.airWaybill)
-    ) {
-      setContentLoaded(true);
-      if (
-        trackingContext.trackingData.get(row.airWaybill)?.status === "ERROR"
-      ) {
-        setContentError(true);
-        setFlag(false);
-      }
-    }
-    // eslint-disable-next-line
-  }, [trackingContext.loading, flag]);
+  // useEffect(() => {
+  //   if (
+  //     flag &&
+  //     !trackingContext.loading &&
+  //     trackingContext.trackingData.get(row.airWaybill)
+  //   ) {
+  //     setContentLoaded(true);
+  //     if (
+  //       trackingContext.trackingData.get(row.airWaybill)?.status === "ERROR"
+  //     ) {
+  //       setContentError(true);
+  //       setFlag(false);
+  //     }
+  //   }
+  //   // eslint-disable-next-line
+  // }, [trackingContext.loading, flag]);
 
   return (
     <RowBox>
@@ -96,15 +99,15 @@ function ShipmentsRow(props) {
           <div className="data-label">
             {t("shipments-dashboard.row.header.airWaybill")}
           </div>
-          <div className="data-value">{row.airWaybill}</div>
+          <div className="data-value">{row.todoAiid}</div>
         </RowSummaryAirbill>
         <RowSummaryReference data-at="row-customer-order">
           <div className="data-label">
             {t("shipments-dashboard.row.header.packageReference")}
           </div>
-          <div className="data-value">{row.packageReference}</div>
+          <div className="data-value">{row.description}</div>
         </RowSummaryReference>
-        <RowSummaryConsigneeName data-at="row-consignee">
+        {/* <RowSummaryConsigneeName data-at="row-consignee">
           <div className="data-label">
             {t("shipments-dashboard.row.header.consigneeName")}
           </div>
@@ -157,9 +160,9 @@ function ShipmentsRow(props) {
               data-type={row.lastEventType}
             ></div>
           </div>
-        </RowSummaryLastEventType>
+        </RowSummaryLastEventType> */}
       </RowSummaryWrapper>
-      <Collapse in={expanded}>
+      {/* <Collapse in={expanded}>
         <Collapse
           in={contentLoaded && !contentError}
           mountOnEnter
@@ -222,7 +225,7 @@ function ShipmentsRow(props) {
             </span>
           </ContentLoading>
         </Collapse>
-      </Collapse>
+      </Collapse> */}
     </RowBox>
   );
 }

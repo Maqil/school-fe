@@ -141,7 +141,7 @@ function Header() {
       setUserRole(auth.user?.role);
       setUserFullName(username)
     }
-  }, [auth.loading, auth.user?.sub]);
+  }, [auth.user, auth.loading]);
 
   //Set css class based on condition
   var languageclass,

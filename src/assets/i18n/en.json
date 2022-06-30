@@ -60,7 +60,7 @@
   "changePassword.block-form.button.cancel": "Cancel",
   "changePassword.block-form.error.oldPassword-required": "Oops! Looks like you missed your old password.",
   "changePassword.block-form.changeError": "Your old password wasn’t right. Try again.",
-  "todo-dashboard.block1.header.page-title": "Todo List",
+  "todo-dashboard.block1.header.page-title": "Success List",
   "shipments-dashboard.date.label.date-range": "Date Range (dd-mm-yyyy)",
   "shipments-dashboard.date.label.from": "From",
   "shipments-dashboard.date.label.to": "To",

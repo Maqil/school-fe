@@ -15,59 +15,59 @@ import { BrowserRouter } from "react-router-dom";
 import { ApiErrorProvider } from "./providers/ApiErrorProvider";
 // import { getI18n } from "react-i18next";
 
-// if (
-//   process.env.REACT_APP_ENV_LOADED === "INT" ||
-//   process.env.REACT_APP_ENV_LOADED === "PROD"
-// ) {
-//   Amplify.configure({
-//     AuthenticationProvider: {
-//       region: process.env.REACT_APP_AWS_REGION,
-//       identityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID,
-//       userPoolId: process.env.REACT_APP_AWS_USERPOOL_ID,
-//       authenticationFlowType: "CUSTOM_AUTH",
-//       userPoolWebClientId: process.env.REACT_APP_AWS_USERPOOL_WEB_CLIENT_ID
-//     },
-//     API: {
-//       endpoints: [
-//         {
-//           name: "another-api",
-//           endpoint: process.env.REACT_APP_UPLOAD_API_BASE,
-//           custom_header: async () => {
-//             return {
-//               Authorization: `${(await Auth.currentSession())
-//                 .getAccessToken()
-//                 .getJwtToken()}`
-//             };
-//           }
-//         }
-//       ]
-//     }
-//   });
-// } else {
-//   Amplify.configure({
-//     Auth: {
-//       region: process.env.REACT_APP_AWS_REGION,
-//       identityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID,
-//       userPoolId: process.env.REACT_APP_AWS_USERPOOL_ID,
-//       userPoolWebClientId: process.env.REACT_APP_AWS_USERPOOL_WEB_CLIENT_ID
-//     },
-//     API: {
-//       endpoints: [
-//         {
-//           name: "another-api",
-//           endpoint: process.env.REACT_APP_UPLOAD_API_BASE,
-//           custom_header: async () => {
-//             return {
-//               Authorization: `${(await Auth.currentSession())
-//                 .getAccessToken()
-//                 .getJwtToken()}`
-//             };
-//           }
-//         }
-//       ]
-//     }
-//   });
-// }
+if (
+  process.env.REACT_APP_ENV_LOADED === "INT" ||
+  process.env.REACT_APP_ENV_LOADED === "PROD"
+) {
+  Amplify.configure({
+    AuthenticationProvider: {
+      region: process.env.REACT_APP_AWS_REGION,
+      identityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID,
+      userPoolId: process.env.REACT_APP_AWS_USERPOOL_ID,
+      authenticationFlowType: "CUSTOM_AUTH",
+      userPoolWebClientId: process.env.REACT_APP_AWS_USERPOOL_WEB_CLIENT_ID
+    },
+    API: {
+      endpoints: [
+        {
+          name: "another-api",
+          endpoint: process.env.REACT_APP_UPLOAD_API_BASE,
+          custom_header: async () => {
+            return {
+              Authorization: `${(await Auth.currentSession())
+                .getAccessToken()
+                .getJwtToken()}`
+            };
+          }
+        }
+      ]
+    }
+  });
+} else {
+  Amplify.configure({
+    Auth: {
+      region: process.env.REACT_APP_AWS_REGION,
+      identityPoolId: process.env.REACT_APP_AWS_IDENTITY_POOL_ID,
+      userPoolId: process.env.REACT_APP_AWS_USERPOOL_ID,
+      userPoolWebClientId: process.env.REACT_APP_AWS_USERPOOL_WEB_CLIENT_ID
+    },
+    API: {
+      endpoints: [
+        {
+          name: "another-api",
+          endpoint: process.env.REACT_APP_UPLOAD_API_BASE,
+          custom_header: async () => {
+            return {
+              Authorization: `${(await Auth.currentSession())
+                .getAccessToken()
+                .getJwtToken()}`
+            };
+          }
+        }
+      ]
+    }
+  });
+}
 // loadScripts();
 
 // function loadScripts() {

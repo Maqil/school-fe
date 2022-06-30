@@ -1,8 +1,8 @@
 import React, { useEffect, useReducer, useState } from "react";
 import { Box, Typography } from "@mui/material";
 import { useTranslation, getI18n } from "react-i18next";
-import { useShipments } from "../../providers/ShipmentsProvider";
-import { ShipmentDataInterface } from "../../interfaces/ShipmentDataInterface";
+import { useTodos } from "../../providers/TodosProvider";
+import { TodoDataInterface } from "../../interfaces/TodoDataInterface";
 import { defaultShipmentOverview } from "../../interfaces/ShipmentsOverviewInterface";
 import { defaultPaginationData } from "../../interfaces/PaginationDataInterface";
 import ShipmentsDatePicker from "../../components/ShipmentsDatePicker/ShipmentsDatePicker";
@@ -10,10 +10,12 @@ import ShipmentsSkSelect from "../../components/ShipmentsSkSelect/ShipmentsSkSel
 import ShipmentsFilterPanel from "../../components/ShipmentsFilterPanel/ShipmentsFilterPanel";
 import ShipmentsOverviewPanel from "../../components/ShipmentsOverviewPanel/ShipmentsOverviewPanel";
 import ShipmentsListPanel from "../../components/ShipmentsListPanel/ShipmentsListPanel";
-import { PageHeader } from "./ShipmentsDashboard.style";
+import { PageHeader } from "./TodosDashboard.style";
 import Moment from "moment";
 import { TabTitle } from "../../utils/GeneralFunctions";
 import { useTracking } from "../../providers/TrackingProvider";
+import { useCustomer } from "../../providers/CustomerProvider";
+import TodosListPanel from "../../components/TodosListPanel/TodosListPanel";
 
 const reducerList = (state, action) => {
   switch (action.type) {
@@ -53,7 +55,7 @@ const reducerList = (state, action) => {
   }
 };
 
-function ShipmentsDashboard() {
+const  TodosDashboard = () => {
   Moment.locale(getI18n().resolvedLanguage);
   const initialListState = {
     startDate: Moment().subtract(14, "days").format("YYYY-MM-DD"),
@@ -69,34 +71,47 @@ function ShipmentsDashboard() {
     loadMore: false
   };
   const [listState, dispatchList] = useReducer(reducerList, initialListState);
-  const [rows, setRows] = useState<ShipmentDataInterface[]>([]);
+  // const [rows, setRows] = useState<ShipmentDataInterface[]>([]);
   const [overview, setOverview] = useState(defaultShipmentOverview);
   const [pagination, setPagination] = useState(defaultPaginationData);
-  const shipmentContext = useShipments();
+  // const shipmentContext = useShipments();
   const { t } = useTranslation();
   const trackingContext = useTracking();
   const [initialDataLoadedFlag, setInitialDataLoadedFlag] = useState(false);
   const [noResults, setNoResults] = useState(false);
+  // const { loadingTodos, todosData, getTodosData} = useTodos();
+  const todoContext = useTodos();
+  const [todoList, setTodoList] = useState(null);
+  const [rows, setRows] = useState<TodoDataInterface[]>([]);
 
-  TabTitle(t("todo-dashboard.block1.header.page-title"));
+  TabTitle(t("shipments-dashboard.block1.header.page-title"));
+  useEffect(() => {
+      todoContext.getTodosData("ziyad@gmail.com");
+      setPagination(todoContext.paginationData);
+      
+    // excluding dependancy on listState.order and orderBy for now.
+    // eslint-disable-next-line
+  }, []);
 
   // useEffect(() => {
-  //   // call getShipmentsData
-  //   setInitialDataLoadedFlag(false);
-  //   setRows([]);
-  //   dispatchList({ type: "pageNumberOne", value: 1 });
-  //   trackingContext.resetTrackingData();
-  //   shipmentContext.getShipmentsData({
-  //     startDate: listState.startDate,
-  //     endDate: listState.endDate,
-  //     account: listState.account,
-  //     pageNumber: "1",
-  //     pageSize: listState.pageSize,
-  //     airWaybill: listState.airWaybill,
-  //     packageReference: listState.packageReference,
-  //     city: listState.city,
-  //     lastEventType: listState.lastEventType
-  //   });
+  //   if (!loadingCustomer && customerData.length !==0) {
+  //     setRows([]);
+  //     dispatchList({ type: "pageNumberOne", value: 1 });
+  //     // trackingContext.resetTrackingData();
+  //     setInitialDataLoadedFlag(false);
+  //     // call getShipmentsData
+  //     shipmentContext.getShipmentsData({
+  //       startDate: listState.startDate,
+  //       endDate: listState.endDate,
+  //       account: listState.account,
+  //       pageNumber: "1",
+  //       pageSize: listState.pageSize,
+  //       airWaybill: listState.airWaybill,
+  //       packageReference: listState.packageReference,
+  //       city: listState.city,
+  //       lastEventType: listState.lastEventType
+  //     });
+  //   }
   //   // excluding dependancy on listState.order and orderBy for now.
   //   // eslint-disable-next-line
   // }, [
@@ -107,7 +122,9 @@ function ShipmentsDashboard() {
   //   listState.airWaybill,
   //   listState.packageReference,
   //   listState.city,
-  //   listState.lastEventType
+  //   listState.lastEventType,
+  //   loadingCustomer,
+  //   customerData
   // ]);
 
   // useEffect(() => {
@@ -131,9 +148,12 @@ function ShipmentsDashboard() {
   //   // eslint-disable-next-line
   // }, [listState.pageNumber]);
 
-  // listen to loading so it only sets rows and pagination once all the data is ready
-  // useEffect(() => {
-  //   if (!shipmentContext.loading) {
+  // // listen to loading so it only sets rows and pagination once all the data is ready
+  useEffect(() => {
+    if (!todoContext.loadingTodos && todoContext.todosData.length !== 0) {
+          setRows([...todoContext.todosData]);
+          console.log('todosData: ', todoContext.todosData);
+          setInitialDataLoadedFlag(true)
   //     // getShipmentsData if changed then update rows and pagination!
   //     setPagination(shipmentContext.paginationData);
   //     setOverview(shipmentContext.shipmentsOverview);
@@ -147,16 +167,21 @@ function ShipmentsDashboard() {
   //       setRows(shipmentContext.shipmentsData);
   //     } else {
   //       // load more pages
-  //       setRows([...rows, ...shipmentContext.shipmentsData]);
+          // setRows([...rows, ...todoContext.todosData]);
   //     }
-  //   }
+    }
   //   // eslint-disable-next-line
-  // }, [
-  //   shipmentContext.loading,
-  //   shipmentContext.shipmentsData,
-  //   shipmentContext.paginationData,
-  //   shipmentContext.shipmentsOverview
-  // ]);
+  }, [
+    todoContext.loadingTodos,
+    todoContext.todosData,
+    todoContext.paginationData,
+    // shipmentContext.shipmentsOverview,
+    // loadingCustomer
+  ]);
+
+  // const { getTodosData } = useTodos();
+  // const todoResponse: any = getTodosData("ziyad@gmail.com");
+  // console.log("todoResponse: ", todoResponse);
 
   return (
     <Box sx={{ flexGrow: 1 }}>
@@ -190,16 +215,16 @@ function ShipmentsDashboard() {
         initialDataLoadedFlag={initialDataLoadedFlag}
       />
 
-      {/* <ShipmentsListPanel
+      <TodosListPanel
         listState={listState}
         dispatchList={dispatchList}
         rows={rows}
         pagination={pagination}
         initialDataLoadedFlag={initialDataLoadedFlag}
         noResults={noResults}
-        loading={shipmentContext.loading}
-      /> */}
+        loading={todoContext.loadingTodos}
+      />
     </Box>
   );
 }
-export default ShipmentsDashboard;
+export default TodosDashboard;

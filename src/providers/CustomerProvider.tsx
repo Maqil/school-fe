@@ -28,66 +28,63 @@ export const CustomerProvider = props => {
   const auth = useAuth();
 
   useEffect(() => {
-    console.log("auth: ", auth)
     const getCustomerData = async (email: string) => {
       let response = {};
       setLoadingCustomer(true);
-      // try {
-        //pass sub_id to api
-        //GET /v1/cargo/profile/sls/?sk_id|cognito_id={id}
-        // CALL: https://akamai-rivo-int.dbaas.aircanada.com/retrieve_customer_profile/admin
-        const headers = {
-          headers: {
-            "Content-Type": "application/json"
-          }
-        };
-        await axios.post(process.env.REACT_APP_HOST + "/graphql", 
-        {
-          query:
-            `
-             {
-              getUserProfileByEmail(email:"` +
-              email +
-              `") {
-                firstName
-                lastName
-                email
-                phone
-                username
-                beautifyRoleName
-              }
-             }
-            `
-        }, headers
-        )
-        .then(res => {
-          if (res.data.errors) {
-            setLoadingCustomer(false);
-            console.debug("FAIL: ", res.data.errors);
-            response = {
-              error: res.data.errors,
-              status: "FAIL"
-            };
-            setErrorCode(error.TIME_OUT);
-          } else {
-            setLoadingCustomer(false);
-            console.log("res.data.data: ", res.data.data);
-            setCustomerData(res.data.data.getUserProfileByEmail)
-            response = {
-              data: res.data.data,
-              status: "SUCCESS"
-            };
-          }
-        })
-        .catch ((err: any) => {
+      const headers = {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      };
+     
+      await axios.post(process.env.REACT_APP_HOST + "/graphql", 
+      {
+        query:
+          `
+           {
+            getUserProfileByEmail(email:"` +
+            email +
+            `") {
+              firstName
+              lastName
+              email
+              phone
+              username
+              beautifyRoleName
+            }
+           }
+          `
+      }, headers
+      )
+      .then(res => {
+        if (res.data.errors) {
           setLoadingCustomer(false);
-          console.debug("ERROR: occured while getting customer profile: ", err);
+          console.debug("FAIL: ", res.data.errors);
           response = {
-            error: err,
+            error: res.data.errors,
             status: "FAIL"
           };
-        })
+          setErrorCode(error.TIME_OUT);
+        } else {
+          setLoadingCustomer(false);
+          console.log("CustomerProvider: ", res.data.data);
+          setCustomerData(res.data.data.getUserProfileByEmail)
+          response = {
+            data: res.data.data,
+            status: "SUCCESS"
+          };
+        }
+      })
+      .catch ((err: any) => {
+        setLoadingCustomer(false);
+        console.debug("ERROR: occured while getting customer profile: ", err);
+        response = {
+          error: err,
+          status: "FAIL"
+        };
+      })
     };
+    
     if (auth.user && auth.user !== null && !auth.loading) {
       getCustomerData(auth.user!.email);
     }

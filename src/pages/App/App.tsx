@@ -17,6 +17,7 @@ import ViewProfile from "../ViewProfile/ViewProfile";
 import { useApiError } from "../../providers/ApiErrorProvider";
 import AcErrorDialog from "../../components/AcErrorDialog/AcErrorDialog";
 import { useIdleTimer } from 'react-idle-timer'
+import TodosDashboard from "../TodosDashboard/TodosDashboard";
 
 function App() {
   const auth = useAuth();
@@ -89,6 +90,9 @@ function App() {
               </Route>
               <Route path="/shipments-dashboard" element={<PrivateRoute />}>
                 <Route path="" element={<ShipmentsDashboard />} />
+              </Route>
+              <Route path="/todos-dashboard" element={<PrivateRoute />}>
+                <Route path="" element={<TodosDashboard />} />
               </Route>
               <Route path="/view-profile" element={<PrivateRoute />}>
                 <Route path="" element={<ViewProfile />} />

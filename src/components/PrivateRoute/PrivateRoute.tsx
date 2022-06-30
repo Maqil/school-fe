@@ -14,12 +14,6 @@ const PrivateRoute = () => {
     fetchState();
   }, [auth.user]);
 
-  if (auth.user) {
-    console.log("user exists",auth.user);
-  } else {
-    console.log("user not found");
-  }
-
   if (auth.loading) return <Loader />;
   return auth.user ? <Outlet /> : <Navigate to="/login" state={state} />;
 };
